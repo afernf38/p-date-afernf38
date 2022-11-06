@@ -191,5 +191,58 @@ public class Date{
         }
         return season;
     }
+    //return the months left until the end of the year
+    public int monthsuntilEnd(int mes, int dia){
+        int meses=0;
+        switch (mes) {
+            case 1:
+                meses=12;
+                break;
+            case 2:
+                meses=11;
+                break;
+            case 3:
+                meses=10;
+                break;
+            case 4:
+                meses=9;
+                break;
+            case 5:
+                meses=8;
+                break;
+            case 6:
+                meses=7;
+                break;
+            case 7:
+                meses=6;
+                break;
+            case 8:
+                meses=5;
+                break;
+            case 9: 
+                meses=4;
+                break;
+            case 10:
+                meses=3;
+                break;
+            case 11:
+                meses=2;
+                break;
+            case 12:
+                meses=1;
+                break;
+            default:
+                break;
+        }
+        return meses;
+    }
+    //returns the string version date
+    public String stringDate(int ano, int mes, int dia)
+    {
+        String date=String.valueOf(dia+"//"+mes+"//"+ano);
+        return date;
+    }
+    //returns all dates until the end of the month
+    
 
 }
