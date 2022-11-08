@@ -243,6 +243,34 @@ public class Date{
         return date;
     }
     //returns all dates until the end of the month
-    
+    public String datesuntilendMonth(int dia, int mes)
+    {
+        String date="";
+        if ((mes==1)||(mes==3)||(mes==5)||(mes==7)||(mes==8)||(mes==10)||(mes==12))
+        {   
+            for (dia<=31 ; dia++)
+            {
+                date=String.valueOf(dia+"//"+mes);
+                return date;
+            }
+        }
+        else if ((mes==4)||(mes==6)||(mes==9)||(mes==1))
+        {   
+
+            for (dia<=30; dia++)
+            {
+                date=String.valueOf(dia+"//"+mes);
+                return date;
+            }
+        }
+        else
+        {
+            for(dia<=28; dia++)
+            {
+                date=String.valueOf(dia+"//"+mes);
+                return date;
+            }
+        }
+    }
 
 }
