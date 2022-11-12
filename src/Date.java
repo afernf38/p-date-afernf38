@@ -1,7 +1,13 @@
 public class Date{
-    private int dia;
-    private int mes;
-    private int ano;
+    public int dia;
+    public int mes;
+    public int ano;
+    public Date(){}
+    public Date(int dia, int mes, int ano){
+        this.dia=dia;
+        this.mes=mes;
+        this.ano=ano;
+    }
     int Getdia()
     {
         return this.dia;
@@ -14,6 +20,7 @@ public class Date{
     {
         return this.ano;
     }
+    //es el mismo año
     public boolean isSameYear(int ano){
         boolean mismoano=false;
         if(this.ano==ano)
@@ -47,7 +54,7 @@ public class Date{
         return mismo;
     }
     //returns the name of the month
-    public String nombreMes(int mes)
+    public String nombreMes()
     {
         String nombre="---";
         switch (mes) {
@@ -94,7 +101,7 @@ public class Date{
     }
 
     //checks if the day of the month is right
-    public boolean dayisRight(int dia, int mes){
+    public boolean dayisRight(){
         boolean isright=false;
         switch (mes) {
             case 1:
@@ -128,7 +135,7 @@ public class Date{
         return isright;
     }
     //return season of this month
-    public String seasonofMonth(int mes, int dia){
+    public String seasonofMonth(){
         String season="";
         switch (mes) {
             case 1:
@@ -192,7 +199,7 @@ public class Date{
         return season;
     }
     //return the months left until the end of the year
-    public int monthsuntilEnd(int mes, int dia){
+    public int monthsuntilEnd(){
         int meses=0;
         switch (mes) {
             case 1:
@@ -237,40 +244,40 @@ public class Date{
         return meses;
     }
     //returns the string version date
-    public String stringDate(int ano, int mes, int dia)
+    public String stringDate()
     {
         String date=String.valueOf(dia+"//"+mes+"//"+ano);
         return date;
     }
     //returns all dates until the end of the month
-    public String datesuntilendMonth(int dia, int mes)
-    {
-        String date="";
-        if ((mes==1)||(mes==3)||(mes==5)||(mes==7)||(mes==8)||(mes==10)||(mes==12))
-        {   
-            for (dia<=31 ; dia++)
-            {
-                date=String.valueOf(dia+"//"+mes);
-                return date;
-            }
-        }
-        else if ((mes==4)||(mes==6)||(mes==9)||(mes==1))
-        {   
+//     public String datesuntilendMonth(int dia, int mes)
+//     {
+//         String date="";
+//         if ((mes==1)||(mes==3)||(mes==5)||(mes==7)||(mes==8)||(mes==10)||(mes==12))
+//         {   
+//             for (dia<=31 ; dia++)
+//             {
+//                 date=String.valueOf(dia+"//"+mes);
+//                 return date;
+//             }
+//         }
+//         else if ((mes==4)||(mes==6)||(mes==9)||(mes==1))
+//         {   
 
-            for (dia<=30; dia++)
-            {
-                date=String.valueOf(dia+"//"+mes);
-                return date;
-            }
-        }
-        else
-        {
-            for(dia<=28; dia++)
-            {
-                date=String.valueOf(dia+"//"+mes);
-                return date;
-            }
-        }
-    }
+//             for (dia<=30; dia++)
+//             {
+//                 date=String.valueOf(dia+"//"+mes);
+//                 return date;
+//             }
+//         }
+//         else
+//         {
+//             for(dia<=28; dia++)
+//             {
+//                 date=String.valueOf(dia+"//"+mes);
+//                 return date;
+//             }
+//         }
+//     }
 
 }
