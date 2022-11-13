@@ -250,34 +250,140 @@ public class Date{
         return date;
     }
     //returns all dates until the end of the month
-//     public String datesuntilendMonth(int dia, int mes)
-//     {
-//         String date="";
-//         if ((mes==1)||(mes==3)||(mes==5)||(mes==7)||(mes==8)||(mes==10)||(mes==12))
-//         {   
-//             for (dia<=31 ; dia++)
-//             {
-//                 date=String.valueOf(dia+"//"+mes);
-//                 return date;
-//             }
-//         }
-//         else if ((mes==4)||(mes==6)||(mes==9)||(mes==1))
-//         {   
+    // public String datesuntilendMonth()
+    // {
+    //     String date="";
+    //     if ((mes==1)||(mes==3)||(mes==5)||(mes==7)||(mes==8)||(mes==10)||(mes==12))
+    //     {   
+    //         for (dia<=31 ; dia++)
+    //         {
+    //             date=String.valueOf(dia+"//"+mes);
+    //             return date;
+    //         }
+    //     }
+    //     else if ((mes==4)||(mes==6)||(mes==9)||(mes==1))
+    //     {   
 
-//             for (dia<=30; dia++)
-//             {
-//                 date=String.valueOf(dia+"//"+mes);
-//                 return date;
-//             }
-//         }
-//         else
-//         {
-//             for(dia<=28; dia++)
-//             {
-//                 date=String.valueOf(dia+"//"+mes);
-//                 return date;
-//             }
-//         }
-//     }
-
+    //         for (dia<=30; dia++)
+    //         {
+    //             date=String.valueOf(dia+"//"+mes);
+    //             return date;
+    //         }
+    //     }
+    //     else
+    //     {
+    //         for(dia<=28; dia++)
+    //         {
+    //             date=String.valueOf(dia+"//"+mes);
+    //             return date;
+    //         }
+    //     }
+    // }
+    //returns the months with the same number of the days
+    //as the month of this date
+    public String sameNumberDay()
+    {   
+        String meses="";
+        switch (mes) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                meses="Enero, Marzo, Mayo, Julio, Agosto, Octubre, Diciembre tienen el mismo numero de dias";
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                meses="Abril, Junio, Septiembre, Noviembre tienen el mismo numero de dias";
+                break;
+            case 2:
+                meses="No hay mas meses con el mismo numero de dias";
+            default:
+                break;
+        }
+        return meses;
+    }
+    //Count the number of days since the first day of the year
+    public int countDays()
+    {
+        int days=0;
+        int mes1=31;
+        int mes2=28;
+        int mes3=30;
+        switch (mes1) {
+            case 1:
+                days=dia;
+                break;
+            case 2:
+                days=dia+mes1;
+                break;
+            case 3:
+                days=dia+mes2+mes3;
+                break;
+            case 4:
+                days=dia+mes2+(2*mes1);
+                break;
+            case 5:
+                days=dia+mes2+(2*mes1)+mes3;
+                break;
+            case 6:
+                days=dia+mes2+(3*mes1)+mes3;
+                break;
+            case 7:
+                days=dia+mes2+(3*mes1)+(2*mes3);
+                break;
+            case 8:
+                days=dia+mes2+(4*mes1)+(2*mes3);
+                break;
+            case 9:
+                days=dia+mes2+(5*mes1)+(2*mes3);
+                break;
+            case 10:
+                days=dia+mes2+(5*mes1)+(3*mes3);
+                break;
+            case 11:
+                days=dia+mes2+(6*mes1)+(3*mes3);
+                break;
+            case 12:
+                days=dia+mes2+(6*mes1)+(4*mes3);
+                break;
+            default:
+                break;
+        }
+        return days;
+    }
+    //Counts the number of attempts needed to generate 
+    // a random date equals to a given date (only inside the same year) (while)
+    public int equalRandom()
+    {   
+        int diaR=(int)(Math.random()*30+1);
+        int mesR=(int)(Math.random()*12+1);
+        int intentos=0;
+        while((dia!=diaR)&&(mes!=mesR))
+        {   
+            diaR=(int)(Math.random()*30+1);
+            mesR=(int)(Math.random()*12+1);
+            intentos++;
+        }
+        intentos--;
+        return intentos;
+    }
+    //Counts the number of attempts needed to generate 
+    // a random date equals to a given date (only inside the same year) (d0 - while)
+    public int equalRandomdo()
+    {   
+        int diaR=(int)(Math.random()*30+1);
+        int mesR=(int)(Math.random()*12+1);
+        int intentos=0;
+        do{
+            diaR=(int)(Math.random()*30+1);
+            mesR=(int)(Math.random()*12+1);
+            intentos++;
+        }while((dia!=diaR)&&(mes!=mesR));
+        return intentos;
+    }
 }

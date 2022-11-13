@@ -18,6 +18,9 @@ public class Menu{
         System.out.println("7 - Estacion del año");
         System.out.println("8 - Meses que quedan para finalizar el año");
         System.out.println("9 - Mostrar formato fecha");
+        System.out.println("10 - Devuelve los meses con el mismo numero de dias que el mes de nuestra fecha");
+        System.out.println("11 - Contar los dias des de que empezo el año");
+        System.out.println("12 - Numero intentos para encontrar fecha con Random()");
         opcion=Teclado.readInteger();
         if(opcion==1)
         {   
@@ -96,6 +99,25 @@ public class Menu{
         {
             String fechaf=fecha.stringDate();
             System.out.println(fechaf);
+        }
+        else if (opcion==10)
+        {
+            String mesesmismodias=fecha.sameNumberDay();
+            System.out.println(mesesmismodias);
+        }
+        else if (opcion==11)
+        {
+            int diasc=fecha.countDays();
+            System.out.println("Des de que empezo el año han pasado "+diasc+" dias.");
+        }
+        else if (opcion==12)
+        {
+            int intentos=fecha.equalRandom();
+            System.out.println("Se ha requerido un total de "+intentos+ " intentos");
+        }
+        else
+        {
+            System.out.println("INTRODUCE UNA OPCION CORRECTA!!!");
         }
         
     }
