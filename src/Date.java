@@ -2,12 +2,61 @@ public class Date{
     public int dia;
     public int mes;
     public int ano;
+    //constructor
     public Date(){}
-    public Date(int dia, int mes, int ano){
-        this.dia=dia;
-        this.mes=mes;
-        this.ano=ano;
-    }
+
+    public Date (int dia, int mes, int ano) throws DateException {
+		//this.month = month;
+		this.setmes(mes);
+		//this.day = day;
+		this.setdia(dia);
+		//this.year = year;
+		this.setano(ano);
+	}
+    public void setdia(int dia) throws DateException {
+		if ( dia < 1 || dia > this.getdiasmes() ) {
+			throw new DateException("Date error: Day " + dia + " of month " + this.mes + " not valid");			
+		}
+		this.dia = dia;
+	}
+	
+	public void setmes (int mes) throws DateException {
+		if ( mes < 1 || mes > 12) {
+			throw new DateException("Date error: Month " + mes + " not valid");
+		}
+		this.mes = mes;
+	}
+	
+	public void setano (int ano) {
+		this.ano = ano;
+	}
+    private int getdiasmes() {
+		int numdias;
+		
+		numdias = 0;
+		switch (this.mes) {
+		case 1: //next
+		case 3: //next
+		case 5: //next
+		case 7: //next
+		case 8: //next
+		case 10: //next
+		case 12:
+			numdias = 31;
+			break;
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			numdias = 30;
+			break;
+		case 2:
+			numdias = 28;
+			break;			
+		}
+		
+		return numdias;
+	}
     int Getdia()
     {
         return this.dia;
