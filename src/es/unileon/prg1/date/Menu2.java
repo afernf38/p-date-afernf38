@@ -1,7 +1,8 @@
+package es.unileon.prg1.date;
+
 public class Menu2 {
 
 	public static void main(String[] args) {
-		Date today;
 		
 		try {
 		    System.out.println("Introduce una fecha:");

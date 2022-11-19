@@ -1,36 +1,70 @@
+package es.unileon.prg1.date;
+
 public class Date{
-    public int dia;
-    public int mes;
-    public int ano;
+    private int dia;
+    private int mes;
+    private int ano;
     //constructor
-    public Date(){}
+   public Date(){
+    this.dia=1;
+    this.mes=1;
+    this.ano=2017;
+   }
+    public Date(Date another){
+        this.dia=another.getDay();
+        this.mes=another.getMonth();
+        this.ano=another.getYear();
+    }
 
     public Date (int dia, int mes, int ano) throws DateException {
 		//this.month = month;
-		this.setmes(mes);
+		this.setMonth(mes);
 		//this.day = day;
-		this.setdia(dia);
+		this.setDay(dia);
 		//this.year = year;
-		this.setano(ano);
+		this.setYear(ano);
 	}
-    public void setdia(int dia) throws DateException {
-		if ( dia < 1 || dia > this.getdiasmes() ) {
+    public void setDay(int dia) throws DateException {
+		if ( dia < 1 || dia > this.daysOfMonth() ) {
 			throw new DateException("Date error: Day " + dia + " of month " + this.mes + " not valid");			
 		}
 		this.dia = dia;
 	}
 	
-	public void setmes (int mes) throws DateException {
+	public void setMonth (int mes) throws DateException {
 		if ( mes < 1 || mes > 12) {
 			throw new DateException("Date error: Month " + mes + " not valid");
 		}
+        if ((mes==2)&&(dia>28))
+        {
+            throw new DateException("Date error: Day " + dia + " not valid");
+        }
+        else if ((mes==11)||(mes==3)||(mes==4)||(mes==6)||(mes==9))
+        {
+            if (dia>30)
+            {
+                throw new DateException("Date error: Day " + dia + " not valid");
+            }
+        }
+        else
+        {
+            if (dia>31)
+            {
+                throw new DateException("Date error: Day " + dia + " not valid");
+            }
+        }
+
 		this.mes = mes;
 	}
 	
-	public void setano (int ano) {
+	public void setYear (int ano) throws DateException {
 		this.ano = ano;
+        if(ano<=-1)
+        {
+            throw new DateException("Date error: Year " + ano + " not valid");
+        }
 	}
-    private int getdiasmes() {
+    public int daysOfMonth() {
 		int numdias;
 		
 		numdias = 0;
@@ -57,91 +91,112 @@ public class Date{
 		
 		return numdias;
 	}
-    int Getdia()
+    int getDay()
     {
         return this.dia;
     }
-    int Getmes()
+    int getMonth()
     {
         return this.mes;
     }
-    int Getano()
+    int getYear()
     {
         return this.ano;
     }
+    public Date tomorrow () throws DateException
+    {   
+        Date tomorrow=new Date(dia+1, mes, ano);
+        boolean variable=tomorrow.dayisRight();
+        if(variable==false)
+        {
+            tomorrow.setDay(1);
+            tomorrow.setMonth(mes+1);
+            return tomorrow;
+        }
+        int dia=tomorrow.getDay();
+        int mes=tomorrow.getMonth();
+        if((dia==32)&&(mes==12))
+        {   
+            tomorrow.setDay(1);
+            tomorrow.setMonth(1);
+            tomorrow.setYear(ano+1);
+            return tomorrow;
+        }
+        return tomorrow;
+    }
     //es el mismo año
-    public boolean isSameYear(int ano){
+    public boolean isSameYear(Date aDay){
         boolean mismoano=false;
-        if(this.ano==ano)
+        if(this.ano==aDay.getYear())
         {
             mismoano=true;
         }
         return mismoano;
     }
-    public boolean isSameMonth(int mes){
+    public boolean isSameMonth(Date aDay){
         boolean mismomes=false;
-        if(this.mes==mes)
+        if(this.mes==aDay.getMonth())
         {
             mismomes=true;
         }
         return mismomes;
     }
-    public boolean isSameDay(int dia){
+    public boolean isSameDay(Date aDay){
         boolean mismodia=false;
-        if(this.dia==dia)
+        if(this.dia==aDay.getDay())
         {
             mismodia=true;
         }
         return mismodia;
     }
-    public boolean isSame(int ano, int mes, int dia){
+    public boolean isSame(Date aDay){
         boolean mismo=false;
-        if ((this.ano==ano)&&(this.mes==mes)&&(this.dia==dia))
+        if ((this.ano==aDay.getYear())&&(this.mes==aDay.getMonth())&&(this.dia==aDay.getDay()))
         {
             mismo=true;
         }
         return mismo;
     }
     //returns the name of the month
-    public String nombreMes()
+    public String getMonthName()
     {
         String nombre="---";
         switch (mes) {
             case 1:
-                nombre="Enero";
+                nombre="January";
                 break;
             case 2:
-                nombre="Febrero";
+                nombre="February";
                 break;
             case 3:
-                nombre="Marzo";
+                nombre="March";
                 break;
             case 4:
-                nombre="Abril";
+                nombre="April";
                 break;
             case 5:
-                nombre="Mayo";
+                nombre="May";
                 break;
             case 6:
-                nombre="Junio";
+                nombre="June";
                 break;
             case 7:
-                nombre="Julio";
+                nombre="July";
                 break;
             case 8:
-                nombre="Agosto";
+                nombre="August";
                 break;
             case 9:
-                nombre="Septiembre";
+                nombre="September";
                 break;
             case 10:
-                nombre="Octubre";
+                nombre="October";
                 break;
             case 11:
-                nombre="Noviembre";
+                nombre="November";
                 break;
             case 12:
-                nombre="Diciembre";
+                nombre="December";
                 break;
             default:
                 break;
@@ -184,63 +239,63 @@ public class Date{
         return isright;
     }
     //return season of this month
-    public String seasonofMonth(){
+    public String getSeasonName(){
         String season="";
         switch (mes) {
             case 1:
             case 2:
-                season="Invierno";
+                season="Winter";
                 break;
             case 12:
                 if(dia>=21)
                 {
-                    season="Invierno";
+                    season="Winter";
                 }
                 else 
                 {
-                    season="Otono";
+                    season="Autumn";
                 }
                 break;
             case 3:
                 if(dia>=21)
                 {
-                    season="Primavera";
+                    season="Spring";
                 }
                 else 
                 {
-                    season="Invierno";
+                    season="Winter";
                 }
             case 4:
             case 5:
-                season="Primavera";
+                season="Spring";
                 break;
             case 6:
                 if(dia>=21)
                 {
-                    season="Verano";
+                    season="Summer";
                 }
                 else 
                 {
-                    season="Primavera";
+                    season="Spring";
                 }
                 break;
             case 7:
             case 8:
-                season="Verano";
+                season="Summer";
                 break;
             case 9:
                 if(dia>=21)
                 {
-                    season="Otono";
+                    season="Autumn";
                 }
                 else 
                 {
-                    season="Verano";
+                    season="Summer";
                 }
                 break;
             case 10:
             case 11:
-                season="Otono";
+                season="Autumn";
                 break;
             default:
                 break;
@@ -248,44 +303,41 @@ public class Date{
         return season;
     }
     //return the months left until the end of the year
-    public int monthsuntilEnd(){
-        int meses=0;
+    public String getMonthsLeft(){
+        String meses="";
         switch (mes) {
             case 1:
-                meses=12;
+                meses="February March April May June July August September October November December ";
                 break;
             case 2:
-                meses=11;
+                meses="March April May June July August September October November December ";
                 break;
             case 3:
-                meses=10;
+                meses="April May June July August September October November December ";
                 break;
             case 4:
-                meses=9;
+                meses="May June July August September October November December ";
                 break;
             case 5:
-                meses=8;
+                meses="June July August September October November December ";
                 break;
             case 6:
-                meses=7;
+                meses="July August September October November December ";
                 break;
             case 7:
-                meses=6;
+                meses="August September October November December ";
                 break;
             case 8:
-                meses=5;
+                meses="September October November December ";
                 break;
             case 9: 
-                meses=4;
+                meses="October November December ";
                 break;
             case 10:
-                meses=3;
+                meses="November December ";
                 break;
             case 11:
-                meses=2;
-                break;
-            case 12:
-                meses=1;
+                meses="December ";
                 break;
             default:
                 break;
@@ -293,64 +345,81 @@ public class Date{
         return meses;
     }
     //returns the string version date
-    public String stringDate()
+    public String toString()
     {
-        String date=String.valueOf(dia+"//"+mes+"//"+ano);
+        String date=String.valueOf(dia+"/"+mes+"/"+ano);
         return date;
     }
     //returns all dates until the end of the month
-    // public String datesuntilendMonth()
-    // {
-    //     String date="";
-    //     if ((mes==1)||(mes==3)||(mes==5)||(mes==7)||(mes==8)||(mes==10)||(mes==12))
-    //     {   
-    //         for (dia<=31 ; dia++)
-    //         {
-    //             date=String.valueOf(dia+"//"+mes);
-    //             return date;
-    //         }
-    //     }
-    //     else if ((mes==4)||(mes==6)||(mes==9)||(mes==1))
-    //     {   
-
-    //         for (dia<=30; dia++)
-    //         {
-    //             date=String.valueOf(dia+"//"+mes);
-    //             return date;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         for(dia<=28; dia++)
-    //         {
-    //             date=String.valueOf(dia+"//"+mes);
-    //             return date;
-    //         }
-    //     }
-    // }
+    public String getDaysLeftOfMonth()
+    {
+        String date="";
+        if ((mes==1)||(mes==3)||(mes==5)||(mes==7)||(mes==8)||(mes==10)||(mes==12))
+        {   
+            for (int i=dia+1; i<=31 ; ++i)
+            {
+                date=(date+" "+String.valueOf(i+"/"+mes+"/"+ano));
+            }
+        }
+        else if ((mes==4)||(mes==6)||(mes==9)||(mes==1))
+        {   
+            for (int i=dia+1; i<=30 ; ++i)
+            {
+                date=(date+" "+String.valueOf(i+"/"+mes+"/"+ano));
+            }
+        }
+        else
+        {   
+            for(int i=dia+1; i<=28; ++i)
+            {
+                date=(date+" "+String.valueOf(i+"/"+mes+"/"+ano));
+                
+            }
+        }
+        date=(date.substring(0+1)+" ");
+        return date;
+    }
     //returns the months with the same number of the days
     //as the month of this date
-    public String sameNumberDay()
+    public String getMonthsSameDays()
     {   
         String meses="";
         switch (mes) {
             case 1:
+                meses="January March May July August October December ";
+                break;
             case 3:
+                meses="January March May July August October December ";
+                break;
             case 5:
+                meses="January March May July August October December ";
+                break;
             case 7:
+                meses="January March May July August October December ";
+                break;
             case 8:
+                meses="January March May July August October December ";
+                break;
             case 10:
+                meses="January March May July August October December ";
+                break;
             case 12:
-                meses="Enero, Marzo, Mayo, Julio, Agosto, Octubre, Diciembre tienen el mismo numero de dias";
+                meses="January March May July August October December ";
                 break;
             case 4:
+                meses="April June September November ";
+                break;
             case 6:
+                meses="April June September November ";
+                break;
             case 9:
+                meses="April June September November ";
+                break;
             case 11:
-                meses="Abril, Junio, Septiembre, Noviembre tienen el mismo numero de dias";
+                meses="April June September November ";
                 break;
             case 2:
-                meses="No hay mas meses con el mismo numero de dias";
+                meses="February ";
             default:
                 break;
         }
@@ -407,7 +476,7 @@ public class Date{
     }
     //Counts the number of attempts needed to generate 
     // a random date equals to a given date (only inside the same year) (while)
-    public int equalRandom()
+    public int numRandomTriesEqualDate()
     {   
         int diaR=(int)(Math.random()*30+1);
         int mesR=(int)(Math.random()*12+1);

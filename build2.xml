@@ -4,7 +4,7 @@
     <property name="lib" value="lib/junit-4.8.2.jar"/>
     <property name="classes" value="classes"/>
 
-    <property name="paquetes" value="Date"/>
+    <property name="paquetes" value="date"/>
     <property name="titulo" value="Tests class Date"/>
 
     <target name="clean">
